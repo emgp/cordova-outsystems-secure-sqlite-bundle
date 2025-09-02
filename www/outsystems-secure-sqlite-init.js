@@ -184,28 +184,42 @@ window.sqlitePlugin.sqliteFeatures["isSQLCipherPlugin"] = true;
 
 // Override existing openDatabase to automatically provide the `key` option
 var originalOpenDatabase = window.sqlitePlugin.openDatabase;
-window.sqlitePlugin.openDatabase = function(options, successCallback, errorCallback) {
+window.sqlitePlugin.openDatabase = function (options, successCallback, errorCallback) {
+    // Verifica se a chave já foi definida
+    if (typeof options.key === 'string') {
+        // Se a chave for vazia, significa que o banco é não criptografado
+        if (options.key === '') {
+            // Apenas valida que a opção `location` está definida
+            if (options.location === undefined) {
+                options.location = 'default';
+            }
+            // Chama o método original sem alterar mais nada
+            return originalOpenDatabase.call(window.sqlitePlugin, options, successCallback, errorCallback);
+        }
+    }
+
+    // Se a chave não foi definida, adquire a chave segura
     return acquireLsk(
         function (key) {
-            // Clone the options
+            // Clone as opções para evitar modificações no objeto original
             var newOptions = {};
             for (var prop in options) {
                 if (options.hasOwnProperty(prop)) {
                     newOptions[prop] = options[prop];
                 }
             }
-            
-            // Ensure `location` is set (it is mandatory now)
+
+            // Garante que a opção `location` está definida
             if (newOptions.location === undefined) {
-                newOptions.location = "default";
+                newOptions.location = 'default';
             }
-            
-            // Set the `key` to the one provided
+
+            // Injeta a chave obtida
             newOptions.key = key;
 
-            // Validate the options and call the original openDatabase
-            validateDbOptions(newOptions);
+            // Chama o método original com as opções ajustadas
             return originalOpenDatabase.call(window.sqlitePlugin, newOptions, successCallback, errorCallback);
         },
-        errorCallback);
+        errorCallback
+    );
 };
