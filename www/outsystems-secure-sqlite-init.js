@@ -177,6 +177,8 @@ function validateDbOptions(options) {
     }
 }
 
+window.sqlitePluginNoKey = window.sqlitePlugin;
+
 // Set the `isSQLCipherPlugin` feature flag to help ensure the right plugin was loaded
 window.sqlitePlugin.sqliteFeatures["isSQLCipherPlugin"] = true;
 
