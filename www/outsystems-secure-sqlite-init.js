@@ -185,23 +185,23 @@ window.sqlitePlugin.sqliteFeatures["isSQLCipherPlugin"] = true;
 // Override existing openDatabase to automatically provide the `key` option
 var originalOpenDatabase = window.sqlitePlugin.openDatabase;
 window.sqlitePlugin.openDatabase = function (options, successCallback, errorCallback) {
-    // Verifica se a chave já foi definida
+    // Check if the key has already been set
     if (typeof options.key === 'string') {
-        // Se a chave for vazia, significa que o banco é não criptografado
+        // If the key is empty, it means the bank is unencrypted
         if (options.key === '') {
-            // Apenas valida que a opção `location` está definida
+            // Just validates that the `location` option is set
             if (options.location === undefined) {
                 options.location = 'default';
             }
-            // Chama o método original sem alterar mais nada
+            // Call the original method without changing anything else
             return originalOpenDatabase.call(window.sqlitePlugin, options, successCallback, errorCallback);
         }
     }
 
-    // Se a chave não foi definida, adquire a chave segura
+    // If the key has not been defined, acquire the secure key
     return acquireLsk(
         function (key) {
-            // Clone as opções para evitar modificações no objeto original
+            // Clone the options
             var newOptions = {};
             for (var prop in options) {
                 if (options.hasOwnProperty(prop)) {
@@ -209,15 +209,15 @@ window.sqlitePlugin.openDatabase = function (options, successCallback, errorCall
                 }
             }
 
-            // Garante que a opção `location` está definida
+            // Ensure `location` is set (it is mandatory now)
             if (newOptions.location === undefined) {
                 newOptions.location = 'default';
             }
 
-            // Injeta a chave obtida
+            // Set the `key` to the one provided
             newOptions.key = key;
 
-            // Chama o método original com as opções ajustadas
+            // Validate the options and call the original openDatabase
             return originalOpenDatabase.call(window.sqlitePlugin, newOptions, successCallback, errorCallback);
         },
         errorCallback
