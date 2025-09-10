@@ -1,9 +1,9 @@
 {
-  "name": "com.outsystems.plugins.SecureSQLiteBundle",
+  "name": "emgp.com.outsystems.plugins.SecureSQLiteBundle",
   "version": "2.2.1",
   "description": "Bundle of SQLite related storage plugins and initialization code for easy use with the OutSystems Platform",
   "cordova": {
-    "id": "com.outsystems.plugins.SecureSQLiteBundle",
+    "id": "emgp.com.outsystems.plugins.SecureSQLiteBundle",
     "platforms": [
       "android",
       "ios",
@@ -31,7 +31,7 @@
   "scripts": {
     "capacitor:update:before": "node build-actions/update_strings_for_keystore.js"
   },
-  "author": "OutSystems",
+  "author": "emgp.OutSystems",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/emgp/cordova-outsystems-secure-sqlite-bundle/issues"

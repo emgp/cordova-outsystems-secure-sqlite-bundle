@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    id="com.outsystems.plugins.SecureSQLiteBundle"
+    id="emgp.com.outsystems.plugins.SecureSQLiteBundle"
     version="2.2.1">
 
-    <name>Cordova OutSystems secure SQLite bundle</name>
+    <name>emgp Cordova OutSystems secure SQLite bundle</name>
     <license>MIT</license>
     <keywords>sqlcipher</keywords>
     <description>Bundle of SQLite plugins and initialization code for easy use with the OutSystems Platform</description>
-    <author>OutSystems</author>
+    <author>emgp.OutSystems</author>
 
     <js-module src="www/outsystems-secure-sqlite-init.js" name="OutSystemsSecureSQLiteBundle">
         <clobbers target="OutSystemsSecureSQLiteBundle" />
