@@ -1,9 +1,9 @@
 {
-  "name": "emgp.com.outsystems.plugins.SecureSQLiteBundle",
+  "name": "emgp-SecureSQLiteBundle",
   "version": "2.2.1",
   "description": "Bundle of SQLite related storage plugins and initialization code for easy use with the OutSystems Platform",
   "cordova": {
-    "id": "emgp.com.outsystems.plugins.SecureSQLiteBundle",
+    "id": "emgp-SecureSQLiteBundle",
     "platforms": [
       "android",
       "ios",
