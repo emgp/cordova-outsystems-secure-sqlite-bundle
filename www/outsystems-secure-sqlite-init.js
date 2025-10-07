@@ -184,14 +184,14 @@ window.sqlitePlugin.openDatabase = function (options, successCallback, errorCall
     // Check if the key has already been set
     if (typeof options.key === 'string') {
         // If the key is empty, it means the bank is unencrypted
-        if (options.key === '') {
+        //if (options.key === '') {
             // Just validates that the `location` option is set
-            if (options.location === undefined) {
-                options.location = 'default';
-            }
-            // Call the original method without changing anything else
-            return originalOpenDatabase.call(window.sqlitePlugin, options, successCallback, errorCallback);
+        if (options.location === undefined) {
+            options.location = 'default';
         }
+        // Call the original method without changing anything else
+        return originalOpenDatabase.call(window.sqlitePlugin, options, successCallback, errorCallback);
+        //}
     }
 
     // If the key has not been defined, acquire the secure key
